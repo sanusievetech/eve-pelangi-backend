@@ -3,6 +3,8 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
+let port = process.env.PORT || 5000;
+
 require('dotenv/config');
 
 const app = express();
@@ -22,9 +24,11 @@ app.get('/', (req, res) => {
 
 //connect to MongoDB
 try {
-    mongoose.connect(process.env.DB_CONNECTION, console.log('connected to DB at port 5000 !'));
+    mongoose.connect(process.env.DB_CONNECTION, console.log('Monggo DB Connected !'));
 } catch (error) {
-    console.log(error);
+    console.log('Monggo DB Not Connected :' + error);
 }
 //How we start listening to the server
-app.listen(5000);
+app.listen(port, () => {
+    console.log('Listening to port 5000;')
+});
