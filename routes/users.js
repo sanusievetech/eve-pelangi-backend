@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 
 //CREATE NEW USER
-router.post('/:name/:phone/:from/:to/:totalPrice/:paymentStatus/:deliveryStatus/:userTotalTransaction', async (req, res) => {
+router.post('/:name/:phone/:from/:to/:totalPrice/:paymentStatus/:userTotalTransaction', async (req, res) => {
     console.log(req.body);
     try {
         const user = new User({
@@ -24,7 +24,6 @@ router.post('/:name/:phone/:from/:to/:totalPrice/:paymentStatus/:deliveryStatus/
             to: req.params.to,
             totalPrice: req.params.totalPrice,
             paymentStatus: req.params.paymentStatus,
-            deliveryStatus: req.params.deliveryStatus,
             userTotalTransaction: req.params.userTotalTransaction,
         });
         const newUser = await user.save();
@@ -56,7 +55,7 @@ router.delete('/:userId', async (req, res) => {
 });
 
 //UPDATE A SPECIFIC USER
-router.patch('/:id/:name/:phone/:from/:to/:totalPrice/:paymentStatus/:deliveryStatus/:userTotalTransaction', async (req, res) => {
+router.patch('/:id/:name/:phone/:from/:to/:totalPrice/:paymentStatus/:userTotalTransaction', async (req, res) => {
     try {
         const updatedUser = await User.updateOne(
             { _id: req.params.id },
@@ -68,7 +67,6 @@ router.patch('/:id/:name/:phone/:from/:to/:totalPrice/:paymentStatus/:deliverySt
                     to: req.params.to,
                     totalPrice: req.params.totalPrice,
                     paymentStatus: req.params.paymentStatus,
-                    deliveryStatus: req.params.deliveryStatus,
                     userTotalTransaction: req.params.userTotalTransaction,
                 }
             }

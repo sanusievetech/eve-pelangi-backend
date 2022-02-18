@@ -28,9 +28,6 @@ const UserSchema = mongoose.Schema({
     paymentStatus: {
         type:String,
     },
-    deliveryStatus: {
-        type:String,
-    },
     userTotalTransaction: {
         type: Number
     },
