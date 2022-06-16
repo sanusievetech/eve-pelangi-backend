@@ -24,9 +24,18 @@ const UserSchema = mongoose.Schema({
     },
     totalPrice: {
         type: Number
-    },    
+    },
+    deliveryPrice: {
+        type: Number
+    },
+    paymentType: {
+        type:String,
+    },
     paymentStatus: {
         type:String,
+    },
+    offlineTransaction: {
+        type:Boolean,
     },
     userTotalTransaction: {
         type: Number

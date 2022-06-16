@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 
 
 //CREATE NEW USER
-router.post('/:name/:phone/:from/:to/:totalPrice/:paymentStatus/:userTotalTransaction', async (req, res) => {
+router.post('/:name/:phone/:from/:to/:totalPrice/:deliveryPrice/:paymentType/:paymentStatus/:userTotalTransaction', async (req, res) => {
     console.log(req.body);
     try {
         const user = new User({
@@ -23,6 +23,8 @@ router.post('/:name/:phone/:from/:to/:totalPrice/:paymentStatus/:userTotalTransa
             from: req.params.from,
             to: req.params.to,
             totalPrice: req.params.totalPrice,
+            deliveryPrice: req.params.deliveryPrice,
+            paymentType: req.params.paymentType,
             paymentStatus: req.params.paymentStatus,
             userTotalTransaction: req.params.userTotalTransaction,
         });
@@ -55,20 +57,36 @@ router.delete('/:userId', async (req, res) => {
 });
 
 //UPDATE A SPECIFIC USER
-router.patch('/:id/:name/:phone/:from/:to/:totalPrice/:paymentStatus/:userTotalTransaction', async (req, res) => {
+// router.patch('/:id/:name/:phone/:from/:to/:totalPrice/:deliveryPrice/:paymentType/:paymentStatus/:userTotalTransaction', async (req, res) => {
+//     try {
+//         const updatedUser = await User.updateOne(
+//             { _id: req.params.id },
+//             {
+//                 $set: {
+//                     name: req.params.name,
+//                     phone: req.params.phone,
+//                     from: req.params.from,
+//                     to: req.params.to,
+//                     totalPrice: req.params.totalPrice,
+//                     deliveryPrice: req.params.deliveryPrice,
+//                     paymentType: req.params.paymentType,
+//                     paymentStatus: req.params.paymentStatus,
+//                     userTotalTransaction: req.params.userTotalTransaction,
+//                 }
+//             }
+//         );
+//         res.json(updatedUser);
+//     } catch (err) {
+//         res.json({ message: err });
+//     }
+// });
+
+router.patch('/:id', async (req, res) => {
     try {
         const updatedUser = await User.updateOne(
             { _id: req.params.id },
             {
-                $set: {
-                    name: req.params.name,
-                    phone: req.params.phone,
-                    from: req.params.from,
-                    to: req.params.to,
-                    totalPrice: req.params.totalPrice,
-                    paymentStatus: req.params.paymentStatus,
-                    userTotalTransaction: req.params.userTotalTransaction,
-                }
+                $set: req.body
             }
         );
         res.json(updatedUser);
