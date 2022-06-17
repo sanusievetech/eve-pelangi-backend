@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 
 //ROUTES
 app.use('/api/users', require('./routes/users'));
+app.use('/api/deposits', require('./routes/deposits'));
 app.use('/api/gmap', require('./routes/gmap'));
 // app.use('/api/whatsapp', require('./routes/whatsapp'));
 
