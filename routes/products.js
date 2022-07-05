@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
-const Deposit = require('../models/deposit');
+const Product = require('../models/product');
 
 // GETTING ALL THE DATA
 router.get('/', async (req, res) => {
     try {
-        const listofDeposits = await Deposit.find();
-        res.json(listofDeposits);
+        const listofData = await Product.find();
+        res.json(listofData);
     } catch (err) {
         res.json({ message: err });
     }
@@ -15,9 +15,9 @@ router.get('/', async (req, res) => {
 // CREATE NEW DATA
 router.post('/create', async (req, res) => {
     try {
-        const deposit = new Deposit(req.body);
-        const newDeposit = await deposit.save();
-        res.json(newDeposit);
+        const data = new Product(req.body);
+        const newData = await data.save();
+        res.json(newData);
     } catch (err) {
         res.json({ message: err });
     }
@@ -26,8 +26,8 @@ router.post('/create', async (req, res) => {
 // GET A SPECIFIC DATA
 router.get('/:id', async (req, res) => {
     try {
-        const spesificDeposit = await Deposit.findById(req.params.id);
-        res.json(spesificDeposit);
+        const spesificData = await Product.findById(req.params.id);
+        res.json(spesificData);
     } catch (err) {
         res.json({ message: err });
     }
@@ -36,23 +36,23 @@ router.get('/:id', async (req, res) => {
 // UPDATE A SPECIFIC DATA
 router.patch('/:id', async (req, res) => {
     try {
-        const updatedDeposit = await Deposit.updateOne(
+        const updatedData = await Product.updateOne(
             { _id: req.params.id },
             {
                 $set: req.body
             }
         );
-        res.json(updatedDeposit);
+        res.json(updatedData);
     } catch (err) {
         res.json({ message: err });
     }
 });
 
 // DELETE A SPECIFIC DATA
-router.delete('/:depositId', async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        const deletedDeposit = await Deposit.remove({ _id: req.params.depositId });
-        res.json(deletedDeposit);
+        const deletedData = await Product.remove({ _id: req.params.id });
+        res.json(deletedData);
     } catch (err) {
         res.json({ message: err });
     }
